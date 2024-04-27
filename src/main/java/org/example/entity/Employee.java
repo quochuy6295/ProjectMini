@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /*
  * Created by Suresh Stalin on 13 / Oct / 2020.
@@ -24,4 +26,20 @@ public class Employee extends BaseObject {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
+
+    private String name;
+    private Date birthDate;
+    private BigDecimal payment;
+    private BigDecimal bonus;
+
+    public Employee(String name, Date birthDate, BigDecimal payment, BigDecimal bonus) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.payment = payment;
+        this.bonus = bonus;
+    }
+
+    public Employee(String name, Date birthDate, double payment, double bonus) {
+        this(name, birthDate, new BigDecimal(payment), new BigDecimal(bonus));
+    }
 }

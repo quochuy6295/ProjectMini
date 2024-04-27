@@ -41,7 +41,7 @@ public class UserControllerMapper {
             userMapperService.create(name, email, mobile);
             System.out.println("User: [" + name + ", " + email + ", " + mobile + "] -> Success: OK");
         } catch (Exception e) {
-            System.out.println("Error --> " + ex.getMessage());
+            System.out.println("Error --> " + e.getMessage());
         }
     }
 
