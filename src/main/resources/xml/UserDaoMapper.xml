@@ -1,0 +1,57 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.repository.UserDaoMapper">
+    <resultMap id="UserResultMap" type="UserDto">
+        <id property="id" column="Id"></id>
+        <result property="name" column="Name"></result>
+        <result property="email" column="Email"></result>
+        <result property="mobile" column="Mobile"></result>
+    </resultMap>
+
+    <select id="getUsers" resultMap="UserResultMap">
+        SELECT
+            u.id,
+            u.Name,
+            u.Email,
+            u.Mobile
+        FROM User as u
+    </select>
+
+    <select id="getUserById" resultMap="UserResultMap">
+        SELECT
+            u.id,
+            u.Name,
+            u.Email,
+            u.Mobile
+        FROM User as u
+        WHERE u.id = #{id}
+    </select>
+
+    <select id="create" parameterType="UserDto">
+        INSERT INTO
+            USER(Name, Email, Mobile)
+        VALUES
+            (#{name}, #{email}, #{mobile});
+    </select>
+
+    <select id="update" parameterType="UserDto">
+        UPDATE
+        USER
+        <set>
+            <if test="name != null">Name = #{name}</if>
+            <if test="email != null">Email = #{email}</if>
+            <if test="mobile != null">Mobile = #{mobile}</if>
+        </set>
+        WHERE User.id = #{id}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM
+            T_USER
+        WHERE
+            Id = #{id}
+    </delete>
+</mapper>
